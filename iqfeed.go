@@ -150,6 +150,7 @@ func (c *IQC) processReceiver(d []byte) {
 	fmt.Println(d[0], sz)
 	
 	data := 0
+	data := []byte{}
 // 	debug := d[0:]
 // 	c.processLvl2Msg(debug)
 	
