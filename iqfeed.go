@@ -146,10 +146,11 @@ func (c *IQC) processLvl2Msg(d []byte) {
 // ProcessReceiver is one of the main reciever functions that interprets data received by IQFeed and processes it in sub functions.
 func (c *IQC) processReceiver(d []byte) {
 	
-// 	data := d[2:]
+	data := d[2:]
 // 	fmt.Println(d[0])
 	
-	c.processLvl2Msg(d[0:])
+	debug := d[0:]
+	c.processLvl2Msg(debug)
 	
 	//0x4F // = "O" = Market Open, it is a single char we need to add a default catch here.  
 	// Also it is prob stalling cuz of this in split since it has no more ,
@@ -157,7 +158,7 @@ func (c *IQC) processReceiver(d []byte) {
 	switch d[0] {
 		
 	case 0x4F: // "O" = Market Open (79 dec)
-		
+		fmt.Println("Market Open")
 	case 0x32:	// number 2
 		c.processLvl2Msg(data)
 	case 0x5A:    // cap Z
