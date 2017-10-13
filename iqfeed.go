@@ -287,8 +287,8 @@ func (c *IQC) Start(connectString string) *IQC {
 	c.Time = make(chan *TimeMsg)
 	c.Updates = make(chan *UpdSummaryMsg)
 	go c.read()
-	c.ReqCurrentUpdateFNames()
-	c.RequestListedMarkets()
+// 	c.ReqCurrentUpdateFNames()
+// 	c.RequestListedMarkets()
 	return c
 
 }
