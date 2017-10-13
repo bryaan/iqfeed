@@ -140,7 +140,8 @@ func (c *IQC) processErrorMsg(d []byte) {
 func (c *IQC) processLvl2Msg(d []byte) {
 	lvlII := &LevelII{}
 // 	e.UnMarshall(d, c.TimeLoc)
-	lvlII.Raw = d
+	items := strings.Split(string(d), ",")
+	lvlII.Raw = items
 	c.LevelII <- lvlII
 }
 
