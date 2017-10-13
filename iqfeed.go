@@ -150,7 +150,7 @@ func (c *IQC) processReceiver(d []byte) {
 	fmt.Println(data)
 	
 	fmt.Println("A")
-	c.processLvl2Msg(d)
+	c.processLvl2Msg(data)
 	fmt.Println("B")
 	
 // 	switch d[0] {
