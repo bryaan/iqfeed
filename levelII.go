@@ -1,5 +1,10 @@
 package iqfeed
 
+import (
+	"strings"
+	"time"
+)
+
 // RegionalMsg A regional update message. See complete message definition in Regional Messages. (http://www.iqfeed.net/dev/api/docs/RegionalMessageFormat.cfm).
 type LevelII struct {
 	Raw           []string  // the  symbol that is being tracked
