@@ -2,6 +2,7 @@ package iqfeed
 
 import "time"
 import "fmt"
+import "strings"
 
 // TimeMsg represents a current timestamp from the network.
 type TimeMsg struct {
