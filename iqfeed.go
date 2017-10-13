@@ -14,6 +14,7 @@ import (
 // IQC provides the main struct for the the IQ Client interface into what IQFeed will be sending us.
 type IQC struct {
 	System       chan *SystemMessage
+	LevelII      chan *LevelII
 	News         chan *NewsMsg
 	Errors       chan *ErrorMsg
 	Fundamental  chan *FundamentalMsg
@@ -136,10 +137,21 @@ func (c *IQC) processErrorMsg(d []byte) {
 	c.Errors <- e
 }
 
+func (c *IQC) processLvl2Msg(d []byte) {
+// 	e := &LevelII{}
+// 	e.UnMarshall(false, c.TimeLoc)
+	c.LevelII <- d
+}
+
 // ProcessReceiver is one of the main reciever functions that interprets data received by IQFeed and processes it in sub functions.
 func (c *IQC) processReceiver(d []byte) {
 	data := d[2:]
 	switch d[0] {
+		
+	case 0x32:	// number 2
+		c.processLvl2Msg(data)
+	case 0x5A:    // cap Z
+		c.processLvl2Msg(data)
 	case 0x53: // Start letter is S, indicating System message (Unicode representation in integer value).
 		c.processSysMsg(data)
 	case 0x50: // Start letter is P, indicating a summary message.
@@ -259,6 +271,7 @@ func (c *IQC) getPutChar(t time.Time) string {
 func (c *IQC) Start(connectString string) *IQC {
 	c.connect(connectString)
 	c.System = make(chan *SystemMessage)
+	c.LevelII = make(chan *[]byte)
 	c.News = make(chan *NewsMsg)
 	c.Errors = make(chan *ErrorMsg)
 	c.Fundamental = make(chan *FundamentalMsg)
