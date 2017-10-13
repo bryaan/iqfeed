@@ -147,11 +147,12 @@ func (c *IQC) processLvl2Msg(d []byte) {
 func (c *IQC) processReceiver(d []byte) {
 	fmt.Println(d)
 	
+	dcopy := d
 	data := d[2:]
 	fmt.Println(d[0])
 	
 	fmt.Println("A")
-	c.processLvl2Msg(data)
+	c.processLvl2Msg(dcopy)
 	fmt.Println("B")
 	
 // 	switch d[0] {
