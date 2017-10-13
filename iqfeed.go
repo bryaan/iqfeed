@@ -164,14 +164,16 @@ func (c *IQC) processReceiver(d []byte) {
 		c.processLvl2Msg(data)
 	case 0x5A:    // cap Z
 		c.processLvl2Msg(data)
+	case 0x54: // Start letter is T, indicating Time message.
+		c.processTimeMsg(data)
+	// For some reason we get blocked on Sys messages on level IIport.
 // 	case 0x53: // Start letter is S, indicating System message (Unicode representation in integer value).
 // 		c.processSysMsg(data)
 // 	case 0x50: // Start letter is P, indicating a summary message.
 // 		c.processSumMsg(data)
 // 	case 0x51: // Start letter is Q, indicating an update message.
 // 		c.processUpdMsg(data)
-	case 0x54: // Start letter is T, indicating Time message.
-		c.processTimeMsg(data)
+
 // 	case 0x52: // Start letter is R, indicating regional update message
 // 		c.processRegUpdMsg(data)
 // 	case 0x46: // Start letter is F, indicating a fundamental message
