@@ -161,10 +161,10 @@ func (c *IQC) processReceiver(d []byte) {
 		fmt.Println("Market Open79")
 	case 0x4F: // "O" = Market Open (79 dec)
 		fmt.Println("Market Open")
-// 	case 0x32:	// number 2
-// 		c.processLvl2Msg(data)
-// 	case 0x5A:    // cap Z
-// 		c.processLvl2Msg(data)
+	case 0x32:	// number 2
+		c.processLvl2Msg(data)
+	case 0x5A:    // cap Z
+		c.processLvl2Msg(data)
 // 	case 0x53: // Start letter is S, indicating System message (Unicode representation in integer value).
 // 		c.processSysMsg(data)
 // 	case 0x50: // Start letter is P, indicating a summary message.
