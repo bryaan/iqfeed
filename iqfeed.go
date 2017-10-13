@@ -147,7 +147,7 @@ func (c *IQC) processLvl2Msg(d []byte) {
 func (c *IQC) processReceiver(d []byte) {
 	
 	sz := len(d)
-	fmt.Println(d[0], sz)
+	fmt.Println(string(d[0]), sz)
 	
 // 	data := 0
 	data := []byte{}
