@@ -145,16 +145,18 @@ func (c *IQC) processLvl2Msg(d []byte) {
 
 // ProcessReceiver is one of the main reciever functions that interprets data received by IQFeed and processes it in sub functions.
 func (c *IQC) processReceiver(d []byte) {
-	fmt.Println(d)
 	
 // 	data := d[2:]
 // 	fmt.Println(d[0])
 	
-	fmt.Println("A")
 	c.processLvl2Msg(d[0:])
-	fmt.Println("B")
+	
+	//0x4F // = "O" = Market Open, it is a single char we need to add a default catch here.  
+	// Also it is prob stalling cuz of this in split since it has no more ,
 	
 // 	switch d[0] {
+		
+// 	case 0x4F: // "O" = Market Open (79 dec)
 		
 // 	case 0x32:	// number 2
 // 		c.processLvl2Msg(data)
@@ -192,20 +194,14 @@ func (c *IQC) read() {
 			c.Conn.Close()
 			break
 		default:
-			fmt.Println("1")
-
 			line, isPrefix, err := r.ReadLine()
-			fmt.Println("2")
 			for err == nil && !isPrefix {
 				if c.CreateBackup {
 					bld := fmt.Sprintf("%s\r\n", string(line))
 					c.writeBackup([]byte(bld))
 				}
-				fmt.Println("3")
 				c.processReceiver(line)
-				fmt.Println("4")
 				line, isPrefix, err = r.ReadLine()
-				fmt.Println("5")
 			}
 			if isPrefix {
 				log.Println("buffer size to small")
