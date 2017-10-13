@@ -146,8 +146,9 @@ func (c *IQC) processLvl2Msg(d []byte) {
 // ProcessReceiver is one of the main reciever functions that interprets data received by IQFeed and processes it in sub functions.
 func (c *IQC) processReceiver(d []byte) {
 	
-	
-	fmt.Println(d[0])
+	sz := len(d)
+
+	fmt.Println(d[0], sz)
 	data := d[2:]
 // 	debug := d[0:]
 // 	c.processLvl2Msg(debug)
@@ -159,6 +160,7 @@ func (c *IQC) processReceiver(d []byte) {
 		
 // 	case 79: // "O" = Market Open (79 dec)
 // 		fmt.Println("Market Open79")
+		
 	case 0x4F: // "O" = Market Open (79 dec)
 		fmt.Println("Market Open")
 	case 0x32:	// number 2
