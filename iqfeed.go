@@ -146,8 +146,7 @@ func (c *IQC) processLvl2Msg(d []byte) {
 // ProcessReceiver is one of the main reciever functions that interprets data received by IQFeed and processes it in sub functions.
 func (c *IQC) processReceiver(d []byte) {
 	
-	sz := len(d)
-	fmt.Println(string(d[0]), sz)
+	
 	
 // 	data := 0
 	data := []byte{}
@@ -192,7 +191,8 @@ func (c *IQC) processReceiver(d []byte) {
 // 	case 0x45: // Start letter is E, error message
 // 		c.processErrorMsg(data)
 	default:
-        	fmt.Println("It's a weekday")
+		sz := len(d)
+		fmt.Println("Unknown: ", string(d[0]), sz)
 	}
 
 }
