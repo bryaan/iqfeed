@@ -15,7 +15,7 @@ type LevelII struct {
 // UnMarshall sends the data into the usable struct for consumption by the application.
 func (r *LevelII) UnMarshall(d []byte, loc *time.Location) {
 // 	items := strings.Split(string(d), ",")
-	copy(r.Raw, d []byte)
+	copy(r.Raw, d)
 	
 	//r.Symbol = items[0]
 	//r.Exchange = items[1]
