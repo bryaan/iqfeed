@@ -187,14 +187,19 @@ func (c *IQC) read() {
 			c.Conn.Close()
 			break
 		default:
+			fmt.Println("1")
+
 			line, isPrefix, err := r.ReadLine()
+			fmt.Println("2")
 			for err == nil && !isPrefix {
 				if c.CreateBackup {
 					bld := fmt.Sprintf("%s\r\n", string(line))
 					c.writeBackup([]byte(bld))
 				}
+				fmt.Println("3")
 				c.processReceiver(line)
 				line, isPrefix, err = r.ReadLine()
+				fmt.Println("4")
 			}
 			if isPrefix {
 				log.Println("buffer size to small")
