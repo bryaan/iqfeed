@@ -157,8 +157,8 @@ func (c *IQC) processReceiver(d []byte) {
 	
 	switch d[0] {
 		
-	case 79: // "O" = Market Open (79 dec)
-		fmt.Println("Market Open79")
+// 	case 79: // "O" = Market Open (79 dec)
+// 		fmt.Println("Market Open79")
 	case 0x4F: // "O" = Market Open (79 dec)
 		fmt.Println("Market Open")
 	case 0x32:	// number 2
