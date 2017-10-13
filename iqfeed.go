@@ -149,8 +149,8 @@ func (c *IQC) processReceiver(d []byte) {
 	data := d[2:]
 // 	fmt.Println(d[0])
 	
-	debug := d[0:]
-	c.processLvl2Msg(debug)
+// 	debug := d[0:]
+// 	c.processLvl2Msg(debug)
 	
 	//0x4F // = "O" = Market Open, it is a single char we need to add a default catch here.  
 	// Also it is prob stalling cuz of this in split since it has no more ,
