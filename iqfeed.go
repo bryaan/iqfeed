@@ -146,11 +146,7 @@ func (c *IQC) processLvl2Msg(d []byte) {
 // ProcessReceiver is one of the main reciever functions that interprets data received by IQFeed and processes it in sub functions.
 func (c *IQC) processReceiver(d []byte) {
 	
-	
-	
-// 	data := 0
 	data := []byte{}
-// 	debug := d[0:]
 // 	c.processLvl2Msg(debug)
 	
 	if sz := len(d); sz > 1 {
@@ -162,24 +158,20 @@ func (c *IQC) processReceiver(d []byte) {
 	// Also it is prob stalling cuz of this in split since it has no more ,
 	
 	switch d[0] {
-		
-// 	case 79: // "O" = Market Open (79 dec)
-// 		fmt.Println("Market Open79")
-		
 	case 0x4F: // "O" = Market Open (79 dec)
 		fmt.Println("Market Open")
 	case 0x32:	// number 2
 		c.processLvl2Msg(data)
 	case 0x5A:    // cap Z
 		c.processLvl2Msg(data)
-// 	case 0x53: // Start letter is S, indicating System message (Unicode representation in integer value).
-// 		c.processSysMsg(data)
+	case 0x53: // Start letter is S, indicating System message (Unicode representation in integer value).
+		c.processSysMsg(data)
 // 	case 0x50: // Start letter is P, indicating a summary message.
 // 		c.processSumMsg(data)
 // 	case 0x51: // Start letter is Q, indicating an update message.
 // 		c.processUpdMsg(data)
-// 	case 0x54: // Start letter is T, indicating Time message.
-// 		c.processTimeMsg(data)
+	case 0x54: // Start letter is T, indicating Time message.
+		c.processTimeMsg(data)
 // 	case 0x52: // Start letter is R, indicating regional update message
 // 		c.processRegUpdMsg(data)
 // 	case 0x46: // Start letter is F, indicating a fundamental message
