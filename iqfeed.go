@@ -198,8 +198,9 @@ func (c *IQC) read() {
 				}
 				fmt.Println("3")
 				c.processReceiver(line)
-				line, isPrefix, err = r.ReadLine()
 				fmt.Println("4")
+				line, isPrefix, err = r.ReadLine()
+				fmt.Println("5")
 			}
 			if isPrefix {
 				log.Println("buffer size to small")
