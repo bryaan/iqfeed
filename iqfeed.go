@@ -148,7 +148,11 @@ func (c *IQC) processReceiver(d []byte) {
 	data := d[2:]
 	fmt.Println(d[0])
 	fmt.Println(data)
+	
+	fmt.Println("A")
 	c.processLvl2Msg(d)
+	fmt.Println("B")
+	
 	switch d[0] {
 		
 	case 0x32:	// number 2
