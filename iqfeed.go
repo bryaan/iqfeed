@@ -138,9 +138,10 @@ func (c *IQC) processErrorMsg(d []byte) {
 }
 
 func (c *IQC) processLvl2Msg(d []byte) {
-// 	e := &LevelII{}
-// 	e.UnMarshall(false, c.TimeLoc)
-	c.LevelII <- d
+	lvlII := &LevelII{}
+// 	e.UnMarshall(d, c.TimeLoc)
+	lvlII.Raw = d
+	c.LevelII <- lvlII
 }
 
 // ProcessReceiver is one of the main reciever functions that interprets data received by IQFeed and processes it in sub functions.
@@ -271,7 +272,7 @@ func (c *IQC) getPutChar(t time.Time) string {
 func (c *IQC) Start(connectString string) *IQC {
 	c.connect(connectString)
 	c.System = make(chan *SystemMessage)
-	c.LevelII = make(chan *[]byte)
+	c.LevelII = make(chan *LevelII)
 	c.News = make(chan *NewsMsg)
 	c.Errors = make(chan *ErrorMsg)
 	c.Fundamental = make(chan *FundamentalMsg)
