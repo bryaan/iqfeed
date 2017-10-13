@@ -7,16 +7,15 @@ import (
 
 // RegionalMsg A regional update message. See complete message definition in Regional Messages. (http://www.iqfeed.net/dev/api/docs/RegionalMessageFormat.cfm).
 type LevelII struct {
-// 	Raw           []string  // the  symbol that is being tracked
-	Raw           string  // the  symbol that is being tracked
+// 	Raw           []string 
+	Raw           []byte 
 
 }
 
 // UnMarshall sends the data into the usable struct for consumption by the application.
 func (r *LevelII) UnMarshall(d []byte, loc *time.Location) {
 // 	items := strings.Split(string(d), ",")
-// 	r.Raw = items
-	r.Raw = string(d)
+	r.Raw = d
 	
 	//r.Symbol = items[0]
 	//r.Exchange = items[1]
