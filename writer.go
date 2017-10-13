@@ -71,7 +71,7 @@ func (c *IQC) WatchOptionSymbol(symbol string, value float64, contractDate time.
 
 // LevelIIWatch Begins a trades only watch on a symbol for Level 2 updates.
 func (c *IQC) LevelIIWatch(symbol string) {
-	c.Write("w" + symbol + "\n")
+	c.Write("w" + symbol + "\r\n")
 }
 
 // TradeOnlyWatch Begins a trades only watch on a symbol for Level 1 updates.
