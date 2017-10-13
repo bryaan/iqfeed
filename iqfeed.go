@@ -147,7 +147,7 @@ func (c *IQC) processLvl2Msg(d []byte) {
 func (c *IQC) processReceiver(d []byte) {
 	
 	data := d[2:]
-// 	fmt.Println(d[0])
+	fmt.Println(d[0])
 	
 // 	debug := d[0:]
 // 	c.processLvl2Msg(debug)
