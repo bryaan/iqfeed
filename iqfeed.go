@@ -164,8 +164,8 @@ func (c *IQC) processReceiver(d []byte) {
 		c.processLvl2Msg(data)
 	case 0x5A:    // cap Z
 		c.processLvl2Msg(data)
-	case 0x53: // Start letter is S, indicating System message (Unicode representation in integer value).
-		c.processSysMsg(data)
+// 	case 0x53: // Start letter is S, indicating System message (Unicode representation in integer value).
+// 		c.processSysMsg(data)
 // 	case 0x50: // Start letter is P, indicating a summary message.
 // 		c.processSumMsg(data)
 // 	case 0x51: // Start letter is Q, indicating an update message.
