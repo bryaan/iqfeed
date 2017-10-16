@@ -144,28 +144,26 @@ func (c *IQC) processLvl2Msg(d []byte) {
 }
 
 // ProcessReceiver is one of the main reciever functions that interprets data received by IQFeed and processes it in sub functions.
-func (c *IQC) processReceiver(d []byte) {
-	
+func (c *IQC) processReceiver(d []byte) {	
 	data := []byte{}
-// 	c.processLvl2Msg(debug)
 	
+	//0x4F = "O" = Market Open, it is a single char we need to add a default catch here.  
+	// Also it is prob stalling cuz of this in split since it has no more ,
 	if sz := len(d); sz > 1 {
 		data = d[2:]
 	} else {
 		data = d[0:]
 	}
-	//0x4F // = "O" = Market Open, it is a single char we need to add a default catch here.  
-	// Also it is prob stalling cuz of this in split since it has no more ,
-	
+
 	switch d[0] {
-	case 0x4F: // "O" = Market Open (79 dec)
-		fmt.Println("Market Open")
-	case 0x32:	// number 2
+	case 0x32: // number 2 = Level 2 Message
 		c.processLvl2Msg(data)
-	case 0x5A:    // cap Z
+	case 0x5A: // cap Z = Level 2 Message (initial?)
 		c.processLvl2Msg(data)
 	case 0x54: // Start letter is T, indicating Time message.
 		c.processTimeMsg(data)
+	case 0x4F: // "O" = Market Open (79 dec)
+		fmt.Println("Market Open")
 	// For some reason we get blocked on Sys messages on level IIport.
 // 	case 0x53: // Start letter is S, indicating System message (Unicode representation in integer value).
 // 		c.processSysMsg(data)
@@ -173,7 +171,6 @@ func (c *IQC) processReceiver(d []byte) {
 // 		c.processSumMsg(data)
 // 	case 0x51: // Start letter is Q, indicating an update message.
 // 		c.processUpdMsg(data)
-
 // 	case 0x52: // Start letter is R, indicating regional update message
 // 		c.processRegUpdMsg(data)
 // 	case 0x46: // Start letter is F, indicating a fundamental message
@@ -185,8 +182,10 @@ func (c *IQC) processReceiver(d []byte) {
 // 	case 0x45: // Start letter is E, error message
 // 		c.processErrorMsg(data)
 	default:
-		sz := len(d)
-		fmt.Println("Unknown: ", string(d[0]), sz)
+		// BugFix: Read what is in buffer so the next message processes correctly.
+		raw := string(d)
+		sz := len(raw)
+		fmt.Println("\nUnknown Message Type: ", raw[0], "\nSize: ", sz, "\nRaw: ", raw)
 	}
 
 }
